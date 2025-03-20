@@ -113,7 +113,10 @@ public class Ball : MonoBehaviour {
 
         Instantiate(holeComplete, canvas);
 
-        ScoreCard.TotalScore += strokes;
+        //ScoreCard.TotalScore += strokes;
+        //Modified line
+        ScoreCard.TotalScore = strokes;
+
         Debug.Log("Score Card: " + ScoreCard.TotalScore);
 
     }
