@@ -10,17 +10,23 @@ public class Restart : MonoBehaviour {
     private Transform score;
     private RectTransform rectTransform;
 
+    //New
+    [SerializeField] private GameObject pause;
+    [HideInInspector]public bool isPaused = false;
+
     private void Start() {
 
         rectTransform = GetComponent<RectTransform>();
 
         score = FindObjectOfType<Score>().transform;
 
+        //New
+        pause.SetActive(false);
     }
 
     private void Update() {
         
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) /* added to prevent resetting after level completion */ && FindObjectOfType<Ball>().canAct) {
 
             Vector3 mousePos = Input.mousePosition;
 
@@ -30,11 +36,15 @@ public class Restart : MonoBehaviour {
             }   
             
         }
-        else if (Input.GetKeyDown(KeyCode.R)) {
+        else if (Input.GetKeyDown(KeyCode.R) /* added to prevent resetting after level completion */ && FindObjectOfType<Ball>().canAct) {
             RestartScene(); 
         }
 
-
+        //New Code
+        if (Input.GetKeyDown(KeyCode.P) && FindObjectOfType<Ball>().canAct)
+        {
+            PauseGame();
+        }
 
     }
 
@@ -48,5 +58,22 @@ public class Restart : MonoBehaviour {
 
         score.GetComponent<ScoreFadeIn>().enabled = true;
         score.GetComponent<ScoreFadeIn>().FadeOut();
+    }
+
+    //New Code
+    public void PauseGame()
+    {
+        if (isPaused)
+        {            
+            Time.timeScale = 1;
+            pause.SetActive(false);
+            isPaused = false;
+        }
+        else
+        {
+            pause.SetActive(true);
+            Time.timeScale = 0;
+            isPaused = true;
+        }
     }
 }

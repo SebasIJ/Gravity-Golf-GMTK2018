@@ -53,7 +53,7 @@ public class Ball : MonoBehaviour {
 
 	private void Update () {
 		
-        if ( (Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(0)) && canAct) {
+        if ( (Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(0)) && canAct && /*disables when paused*/ !FindObjectOfType<Restart>().isPaused) {
 
             rb2d.gravityScale = -rb2d.gravityScale;
 
