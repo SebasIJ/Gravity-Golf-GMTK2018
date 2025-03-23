@@ -25,21 +25,21 @@ public class LevelTool : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (isAct)
-		{
-			isAct = false;
-			lm.worldIndex.Clear();
+        if (isAct)
+        {
+            isAct = false;
+            lm.worldIndex.Clear();
 
-			int i = 0;
-			foreach(World w in worldIndex)
-			{
-				lm.worldIndex.Add(new LevelManager.World(w.name));
-				foreach(Object o in w.levelIndex)
-				{
-					lm.worldIndex[i].levelIndex.Add(o.name);
-				}
-				i++;
-			}
-		}
-	}
+            int i = 0;
+            foreach (World w in worldIndex)
+            {
+                lm.worldIndex.Add(new LevelManager.World(w.name));
+                foreach (Object o in w.levelIndex)
+                {
+                    lm.worldIndex[i].levelIndex.Add(o.name);
+                }
+                i++;
+            }
+        }
+    }
 }
