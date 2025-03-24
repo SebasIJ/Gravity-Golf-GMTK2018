@@ -75,6 +75,37 @@ public class Ball : MonoBehaviour {
             anim.SetTrigger("swap");
         }
 
+
+        //New dash ability
+        if(canAct && Input.GetKeyDown(KeyCode.X) && !FindObjectOfType<Restart>().isPaused)
+        {
+            //float to contain the last direction the ball was going in
+            float direction;
+
+            //does not calculate direction if velocity was 0
+            if (rb2d.velocity.x == 0)
+            {
+                direction = 1;
+            }
+            else
+            {
+                //gets direction by dividing x velocity by its absolute value
+                direction = rb2d.velocity.x / Mathf.Abs(rb2d.velocity.x);
+            }
+            
+            //Resets velocity
+            rb2d.velocity = Vector2.zero;
+
+            //adds impulse force in a horizontal direction
+            rb2d.AddForce(Vector2.right * 3 * direction, ForceMode2D.Impulse);
+
+            //adds one stroke to the score
+            strokes += 2;
+
+            //updates the score
+            score.UpdateScore(strokes);
+        }
+
 	}
 
 
