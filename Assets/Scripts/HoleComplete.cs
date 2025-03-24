@@ -26,9 +26,9 @@ public class HoleComplete : MonoBehaviour {
     private void Update() {
 
         transform.localScale = Vector3.SmoothDamp(transform.localScale, targetSize, ref currentVelocity, smoothTime);
-
+        //reduces wait time
         duration = duration - Time.deltaTime;
-
+        //when wait time is over
         if (duration <= 0 && actOnce) {
             actOnce = false;
 

@@ -24,9 +24,10 @@ public class FadeDiamond : MonoBehaviour
 
     private void Start()
     {
-
+        //gets the camera
         cameraMain = Camera.main;
 
+        //sets start scale and target scale depending on if the scene is fading in or out
         if (fadeIn) {
 
             startScale = scaleRatio * cameraMain.orthographicSize;
@@ -48,16 +49,19 @@ public class FadeDiamond : MonoBehaviour
 
         totalTime += Time.deltaTime;
 
+        //adjusts the scale over time
         transform.localScale = Vector3.Lerp(startScale, targetScale, totalTime / fadeTime);
 
-
+        //checks if the scale has reached the target scale
         if (transform.localScale == targetScale)
         {
-
+            //if the scene is fading in destroys the fade object
             if (fadeIn)
             {
                 Destroy(gameObject);
             }
+            //else if the scene is restarting resets the level
+            //otherwise goes to the next level
             else
             {
                 if (restartScene)
